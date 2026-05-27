@@ -29,7 +29,6 @@ Resources:
           Properties:
             Path: /hello
             Method: get
-            hjh
   ApiGatewayFunctionPy:
     Type: AWS::Serverless::Function 
     Properties:
