@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lamda local demo
+
+  
+Resources:
+  LambdaDemoFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: lambda/ # format is projectPath/
+      Handler: lambda.lambdaHandler # format is filename.functionName
+      Runtime: nodejs24.x
+  LambdaDemoFunctionPy:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: lambda/ # format is projectPath/
+      Handler: lambdapy.lambda_handler # format is filename.functionName
+      Runtime: python3.12
+  ApiGatewayFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: apigateway/ # format is projectPath/
+      Handler: apigateway.lambdaHandler # format is filename.functionName
+      Runtime: nodejs24.x
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hello
+            Method: get
+            hjh
+  ApiGatewayFunctionPy:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: apigateway/ # format is projectPath/
+      Handler: apigatewaypy.lambda_handler # format is filename.functionName
+      Architectures:
+        - arm64
+      Runtime: python3.12
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hellopy
+            Method: get
+
+#Type: AWS::DynamoDB::Table
+#Type: AWS::S3::Bucket
+#Type: AWS::CloudFront::Distribution
+#Architectures: (Default)
+  #- x86_64
+#Architectures:
+  #- arm64
